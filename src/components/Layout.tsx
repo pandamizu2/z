@@ -26,25 +26,11 @@ const Layout = () => {
     window.scrollTo(0, 0);
   }, [location]);
 
-  const handleServicesClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (location.pathname !== '/') {
-      navigate('/', { state: { scrollToServices: true } });
-    } else {
-      const servicesSection = document.getElementById('services');
-      servicesSection?.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   const navLinks = [
     { name: translations[language].nav.home, path: '/' },
     { name: translations[language].nav.portfolio, path: '/portfolio' },
     { name: translations[language].nav.cv, path: '/cv' },
-    { 
-      name: translations[language].nav.services, 
-      path: '/#services',
-      onClick: handleServicesClick 
-    },
+    { name: translations[language].nav.services, path: '/services' },
     { name: translations[language].nav.contact, path: '/contact' },
   ];
 
@@ -53,9 +39,6 @@ const Layout = () => {
   };
 
   const isActivePath = (path: string) => {
-    if (path === '/#services') {
-      return location.pathname === '/' && location.hash === '#services';
-    }
     return location.pathname === path;
   };
 
@@ -80,7 +63,6 @@ const Layout = () => {
                 <Link 
                   key={link.name} 
                   to={link.path}
-                  onClick={link.onClick}
                   className={`relative py-2 ${
                     isActivePath(link.path)
                       ? 'text-indigo-600 dark:text-indigo-400 font-medium'
@@ -130,12 +112,7 @@ const Layout = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  onClick={(e) => {
-                    if (link.onClick) {
-                      link.onClick(e);
-                    }
-                    setIsMenuOpen(false);
-                  }}
+                  onClick={() => setIsMenuOpen(false)}
                   className={`block py-2 px-3 rounded-lg ${
                     isActivePath(link.path)
                       ? 'bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-medium'
