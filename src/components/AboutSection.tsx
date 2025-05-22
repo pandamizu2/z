@@ -118,11 +118,11 @@ const AboutSection = () => {
               { name: "Premiere Pro", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Adobe_Premiere_Pro_CC_icon.svg/512px-Adobe_Premiere_Pro_CC_icon.svg.png" },
               { name: "Illustrator", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/512px-Adobe_Illustrator_CC_icon.svg.png" },
               { name: "Photoshop", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/512px-Adobe_Photoshop_CC_icon.svg.png" },
-              { name: "Canva", src: "https://upload.wikimedia.org/wikipedia/he/5/56/Canva-logo.png" },
-              { name: "MS Office", src: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Microsoft_Office_logo_%282013%E2%80%932019%29.svg" },
-              { name: "CapCut", src: "https://cdn.prod.website-files.com/64ea57571d50b02423c4505d/64fb219ade937671b42e011e_capcut%20logo%20png.png" },
-              { name: "Filmora", src: "https://i.imgur.com/UojugHh.png" },
-              { name: language === 'en' ? "AI Tools" : "Alat AI", src: "https://i.imgur.com/E6NHQPb.png" }
+              { name: "Canva", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Canva_icon_2021.svg/512px-Canva_icon_2021.svg.png" },
+              { name: "MS Office", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Microsoft_Office_logo_%282019%E2%80%93present%29.svg/512px-Microsoft_Office_logo_%282019%E2%80%93present%29.svg.png" },
+              { name: "CapCut", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Capcut_icon.svg/512px-Capcut_icon.svg.png" },
+              { name: "Filmora", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Wondershare_filmora_logo.svg/512px-Wondershare_filmora_logo.svg.png" },
+              { name: language === 'en' ? "AI Tools" : "Alat AI", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/512px-ChatGPT_logo.svg.png" }
             ].map((tool, index) => (
               <motion.div
                 key={tool.name}
