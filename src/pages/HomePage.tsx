@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Box, Workflow, Video, Monitor, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations';
 import AboutSection from '../components/AboutSection';
-import ServicesSection from '../components/ServicesSection';
 import EducationSection from '../components/EducationSection';
 import SkillsSection from '../components/SkillsSection';
 
@@ -26,19 +25,6 @@ const HomePage = () => {
     }, 3000);
     return () => clearInterval(interval);
   }, [texts.length]);
-
-  useEffect(() => {
-    if (location.state?.scrollToServices) {
-      const servicesSection = document.getElementById('services');
-      if (servicesSection) {
-        setTimeout(() => {
-          servicesSection.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      }
-      // Clear the state
-      window.history.replaceState({}, document.title);
-    }
-  }, [location.state]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -175,9 +161,6 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
-      {/* Services Section */}
-      <ServicesSection />
       
       {/* CTA Section */}
       <section className="py-20 main-gradient text-white">
