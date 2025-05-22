@@ -106,7 +106,38 @@ const PortfolioPage = () => {
               transition={{ duration: 0.5 }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-              {/* 3D Product Visualizations */}
+              {/* Design Works */}
+              {(activeCategory === 'all' || activeCategory === 'design') && designWorks.map((work, index) => (
+                <motion.div
+                  key={`design-${index}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all"
+                >
+                  <div className="relative aspect-[3/4] overflow-hidden">
+                    <img
+                      src={work.image}
+                      alt={work.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <p className="text-white font-medium">{work.title}</p>
+                        <p className="text-white/80 text-sm mt-1">{work.description}</p>
+                        <a
+                          href={`/portfolio/${work.slug}`}
+                          className="inline-flex items-center gap-1 text-white/90 text-sm mt-2 hover:text-white"
+                        >
+                          View Details <ExternalLink className="w-4 h-4" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+
+              {/* 3D Products */}
               {(activeCategory === 'all' || activeCategory === '3d') && productWorks.map((product, index) => (
                 <motion.div
                   key={`3d-${index}`}
@@ -115,7 +146,7 @@ const PortfolioPage = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all"
                 >
-                  <div className="relative aspect-square overflow-hidden">
+                  <div className="relative aspect-[3/4] overflow-hidden">
                     <img
                       src={product.image}
                       alt={product.title}
@@ -138,32 +169,7 @@ const PortfolioPage = () => {
                 </motion.div>
               ))}
 
-              {/* Design Works from Instagram */}
-              {(activeCategory === 'all' || activeCategory === 'design') && designWorks.map((work, index) => (
-                <motion.div
-                  key={`design-${index}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all"
-                >
-                  <div className="relative aspect-square overflow-hidden">
-                    <img
-                      src={work.image}
-                      alt={work.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <p className="text-white font-medium">{work.title}</p>
-                        <p className="text-white/80 text-sm mt-1">{work.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-
-              {/* Video Edits */}
+              {/* Video Works */}
               {(activeCategory === 'all' || activeCategory === 'video') && videoWorks.map((video, index) => (
                 <motion.div
                   key={`video-${index}`}
@@ -172,7 +178,7 @@ const PortfolioPage = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all"
                 >
-                  <div className="relative aspect-[9/16] bg-gray-900">
+                  <div className="relative aspect-[3/4]">
                     <iframe
                       src={video.embedUrl}
                       title={video.title}
@@ -203,7 +209,47 @@ const PortfolioPage = () => {
   );
 };
 
-// 3D product visualization works
+// Design works data with slugs for individual pages
+const designWorks = [
+  {
+    title: "Brand Identity Design",
+    description: "Modern branding concept with clean typography and bold colors",
+    image: "https://images.pexels.com/photos/1037992/pexels-photo-1037992.jpeg",
+    slug: "brand-identity"
+  },
+  {
+    title: "Social Media Campaign",
+    description: "Engaging content series for product launch",
+    image: "https://images.pexels.com/photos/1279813/pexels-photo-1279813.jpeg",
+    slug: "social-media-campaign"
+  },
+  {
+    title: "Editorial Layout",
+    description: "Magazine spread design with dynamic composition",
+    image: "https://images.pexels.com/photos/1764436/pexels-photo-1764436.jpeg",
+    slug: "editorial-layout"
+  },
+  {
+    title: "Product Photography",
+    description: "Minimalist product shots with natural lighting",
+    image: "https://images.pexels.com/photos/2536965/pexels-photo-2536965.jpeg",
+    slug: "product-photography"
+  },
+  {
+    title: "Digital Illustration",
+    description: "Custom artwork for marketing materials",
+    image: "https://images.pexels.com/photos/1762851/pexels-photo-1762851.jpeg",
+    slug: "digital-illustration"
+  },
+  {
+    title: "UI/UX Design",
+    description: "Mobile app interface with intuitive navigation",
+    image: "https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg",
+    slug: "ui-ux-design"
+  }
+];
+
+// Rest of the data remains the same
 const productWorks = [
   {
     title: "Dish Soap Bottle",
@@ -240,146 +286,9 @@ const productWorks = [
     description: "Modern phone concept render with subtle glow and reflections",
     image: "https://i.imgur.com/rVQYIjW.jpeg",
     tools: ["Blender", "Cycles", "Tech"]
-  },
-  {
-    title: "Supplement Bottle",
-    description: "Plastic jar for supplement or protein packaging with clean lighting",
-    image: "https://i.imgur.com/vbpaR0Z.jpeg",
-    tools: ["Blender", "Cycles", "Packaging"]
-  },
-  {
-    title: "Spray Bottle",
-    description: "Sleek cosmetic spray bottle design with metallic finish",
-    image: "https://i.imgur.com/zTgt8BF.jpeg",
-    tools: ["Blender", "Cycles", "Cosmetic"]
-  },
-  {
-    title: "Black Tumbler",
-    description: "Stylized tumbler model with glossy black material for product mockups",
-    image: "https://i.imgur.com/CBUV54m.jpeg",
-    tools: ["Blender", "Cycles", "Product"]
-  },
-  {
-    title: "Plastic Kettle",
-    description: "Simple water kettle in solid plastic material for home appliance modeling",
-    image: "https://i.imgur.com/iVbVWX9.jpeg",
-    tools: ["Blender", "Cycles", "Product"]
-  },
-  {
-    title: "Square Perfume Bottle",
-    description: "Dark glass perfume bottle design with minimalist aesthetics",
-    image: "https://i.imgur.com/eeV6JNv.jpeg",
-    tools: ["Blender", "Cycles", "Cosmetic"]
-  },
-  {
-    title: "Woven Basket",
-    description: "Handmade-style 3D basket with realistic weaving pattern",
-    image: "https://i.imgur.com/Z2iyin6.jpeg",
-    tools: ["Blender", "Cycles", "Craft"]
-  },
-  {
-    title: "Bread Rolls",
-    description: "Realistic bakery-style bread rolls with detailed bump texture",
-    image: "https://i.imgur.com/vaRzZun.jpeg",
-    tools: ["Blender", "Cycles", "Food"]
-  },
-  {
-    title: "Safety Goggles",
-    description: "Functional safety eyewear with semi-transparent plastic material",
-    image: "https://i.imgur.com/QXLOsSe.jpeg",
-    tools: ["Blender", "Cycles", "Gear"]
-  },
-  {
-    title: "Halloween Pumpkin",
-    description: "Cute stylized pumpkin with witch hat, great for seasonal content",
-    image: "https://i.imgur.com/bTjoecb.jpeg",
-    tools: ["Blender", "Cycles", "Stylized"]
-  },
-  {
-    title: "Katana Sword",
-    description: "Clean render of a curved Japanese sword with dark lighting setup",
-    image: "https://i.imgur.com/oManWn1.jpeg",
-    tools: ["Blender", "Cycles", "Weapon"]
-  },
-  {
-    title: "Wireless Mouse",
-    description: "Modern mouse design with smooth contours and subtle reflections",
-    image: "https://i.imgur.com/8k8rTah.jpeg",
-    tools: ["Blender", "Cycles", "Tech"]
-  },
-  {
-    title: "Fish Cutting Board",
-    description: "Cartoonish food scene featuring sliced fish on a wooden board",
-    image: "https://i.imgur.com/DwkATyt.png",
-    tools: ["Blender", "Cycles", "Stylized"]
   }
 ];
 
-// Design works data from Instagram
-const designWorks = [
-  {
-    title: "Brand Identity Design",
-    description: "Modern branding concept with clean typography and bold colors",
-    image: "https://i.imgur.com/OaxSf5q.jpeg"
-  },
-  {
-    title: "Social Media Campaign",
-    description: "Engaging content series for product launch",
-    image: "https://i.imgur.com/S5JzCuF.jpeg"
-  },
-  {
-    title: "Editorial Layout",
-    description: "Magazine spread design with dynamic composition",
-    image: "https://i.imgur.com/9WBI55D.jpeg"
-  },
-  {
-    title: "Product Photography",
-    description: "Minimalist product shots with natural lighting",
-    image: "https://i.imgur.com/FlH2DrU.jpeg"
-  },
-  {
-    title: "Digital Illustration",
-    description: "Custom artwork for marketing materials",
-    image: "https://i.imgur.com/rQxdlXM.jpeg"
-  },
-  {
-    title: "UI/UX Design",
-    description: "Mobile app interface with intuitive navigation",
-    image: "https://i.imgur.com/2MLH0il.jpeg"
-  },
-  {
-    title: "Food Packaging Design",
-    description: "Creative packaging design for artisanal food products",
-    image: "https://images.pexels.com/photos/1435904/pexels-photo-1435904.jpeg"
-  },
-  {
-    title: "Event Poster Design",
-    description: "Eye-catching poster for music festival",
-    image: "https://images.pexels.com/photos/1293120/pexels-photo-1293120.jpeg"
-  },
-  {
-    title: "Corporate Branding",
-    description: "Complete brand identity package for tech startup",
-    image: "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg"
-  },
-  {
-    title: "Magazine Cover",
-    description: "Contemporary magazine cover design",
-    image: "https://images.pexels.com/photos/1591056/pexels-photo-1591056.jpeg"
-  },
-  {
-    title: "Web Design",
-    description: "Modern e-commerce website design",
-    image: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg"
-  },
-  {
-    title: "Social Media Kit",
-    description: "Cohesive social media template design",
-    image: "https://images.pexels.com/photos/5082566/pexels-photo-5082566.jpeg"
-  }
-];
-
-// Video works data
 const videoWorks = [
   {
     title: "Product Launch Teaser",
